@@ -1,0 +1,117 @@
+CODE : 
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        l, r = 0, len(s) - 1 
+
+        while l < r:
+            s[l], s[r] = s[r], s[l]
+            l += 1
+            r -= 1
+EXPLANATION : 
+🎯 Problem Goal:
+Reverse the list s in-place — meaning:
+
+You cannot return a new list.
+
+You must modify the original list using constant extra space (O(1)).
+
+🔍 Line-by-line Explanation:
+1. left, right = 0, len(s) - 1
+Two pointers are used:
+
+left: starts at the beginning of the list.
+
+right: starts at the end of the list.
+
+2. while left < right:
+This loop runs as long as left is before right.
+
+Once they meet or cross, the list is fully reversed.
+
+3. s[left], s[right] = s[right], s[left]
+This line swaps the characters at the left and right positions.
+
+For example, if s = ['h', 'e', 'l', 'l', 'o']:
+
+First iteration swaps 'h' and 'o' → ['o', 'e', 'l', 'l', 'h']
+
+4. left += 1 and right -= 1
+Move the left pointer one step to the right.
+
+Move the right pointer one step to the left.
+
+This brings you closer to the middle of the list.
+
+🔄 Dry Run:
+Input: s = ['h', 'e', 'l', 'l', 'o']
+
+Iteration	left	right	List after swap
+1	0	4	['o', 'e', 'l', 'l', 'h']
+2	1	3	['o', 'l', 'l', 'e', 'h']
+3	2	2	Loop stops (middle reached)
+
+Final list: ['o', 'l', 'l', 'e', 'h']
+
+🧠 Key Concepts:
+Two-pointer approach: Efficient for in-place problems.
+
+In-place modification: You don’t use any extra list.
+
+O(n) time, O(1) space: Perfect for large input sizes. 
+
+CODE 2 : 
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        def helper(left: int, right: int):
+            if left >= right:
+                return
+            s[left], s[right] = s[right], s[left]
+            helper(left + 1, right - 1)
+        
+        helper(0, len(s) - 1)
+EXPLANATION : 
+🧠 Explanation:
+1. Function helper(left, right)
+It's a recursive function that swaps the characters at left and right.
+
+Then it calls itself with left + 1 and right - 1.
+
+2. Base case:
+python
+Copy
+Edit
+if left >= right:
+    return
+This stops the recursion once left meets or crosses right.
+
+3. Swap step:
+python
+Copy
+Edit
+s[left], s[right] = s[right], s[left]
+Just like in the iterative version, we swap elements from the ends.
+
+4. Recursive call:
+python
+Copy
+Edit
+helper(left + 1, right - 1)
+This keeps moving toward the middle, just like the two-pointer approach.
+
+🔄 Example:
+Input: ["h", "e", "l", "l", "o"]
+
+Calls will look like:
+
+arduino
+Copy
+Edit
+helper(0, 4) → swap 'h' and 'o'
+helper(1, 3) → swap 'e' and 'l'
+helper(2, 2) → stop (middle)
+Result: ["o", "l", "l", "e", "h"]
+
+🔎 Notes:
+Time Complexity: O(n)
+
+Space Complexity: O(n) — because of recursive call stack.
