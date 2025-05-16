@@ -1,0 +1,61 @@
+CODE : 
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        seen = set()
+        for num in nums:
+            if num in seen:
+                return True
+            seen.add(num)
+        return False 
+EXPLANATION : 
+🧠 Variable Explanation:
+seen: a set used to keep track of all numbers we've seen so far.
+
+Sets are great for this because they allow O(1) average-time lookups and insertions.
+
+🔁 How the Loop Works:
+python
+Copy
+Edit
+for num in nums:
+    if num in seen:
+        return True
+    seen.add(num)
+Loop through each element num in the list nums.
+
+Check if num is already in the set seen:
+
+✅ If yes, it means we've seen it before → so return True (duplicate found).
+
+❌ If no, add num to seen and keep going.
+
+If the loop finishes and no duplicate was found, return False.
+
+🔄 Example:
+Input: nums = [1, 2, 3, 4, 1]
+
+Step-by-step:
+
+seen = {} (empty set)
+
+Check 1 → not in seen → add 1 → seen = {1}
+
+Check 2 → not in seen → add 2 → seen = {1, 2}
+
+Check 3 → not in seen → add 3 → seen = {1, 2, 3}
+
+Check 4 → not in seen → add 4 → seen = {1, 2, 3, 4}
+
+Check 1 → already in seen → return True
+
+✅ So, output = True (because 1 is duplicated)
+
+🕒 Time and Space Complexity:
+Time: O(n) — One pass through the list.
+
+Space: O(n) — In the worst case (all unique), we store every number in the set.
+
+🔎 Summary:
+Efficient and clean solution using a set.
+
+Perfect for checking duplicates in a list.
