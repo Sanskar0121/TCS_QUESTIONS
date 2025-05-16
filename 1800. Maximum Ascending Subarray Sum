@@ -1,4 +1,4 @@
-Code : 
+Code 1 : 
 class Solution:
     def maxAscendingSum(self, nums: List[int]) -> int:
         cur = nums[0]
@@ -13,7 +13,7 @@ class Solution:
         return res 
        
 
-Explanation : 
+Explanation 1: 
 ✅ What it does:
 It tracks ascending subarrays (where each number is greater than the one before).
 
@@ -65,3 +65,103 @@ The code finds the maximum sum of any strictly increasing subarray.
 Time complexity: O(n), where n is the length of the array.
 
 Space complexity: O(1) – uses constant space. 
+
+
+CODE 2 : 
+class Solution:
+    def maxAscendingSum(self, nums: List[int]) -> int:
+        cur = nums[0]
+        res = cur 
+
+        for i in range(1, len(nums)):
+            if not (nums[i-1] < nums[i]):
+                cur = 0 
+            cur += nums[i]
+            res = max(res, cur)
+        return res  
+
+EXPLANATION 2 : 
+🧠 Variable Explanation:
+cur: Tracks the sum of the current ascending subarray.
+
+res: Keeps track of the maximum sum of any ascending subarray found so far.
+
+🧱 Step-by-step Explanation:
+Initialization:
+
+cur = nums[0]: Start with the first number.
+
+res = cur: Initialize the result with the first number.
+
+Loop through the array from index 1:
+
+if not (nums[i-1] < nums[i]):
+
+This means the ascending order is broken or equal (nums[i-1] >= nums[i]).
+
+So we reset the current sum cur = 0.
+
+cur += nums[i]: Add the current number to cur (starting fresh or continuing).
+
+res = max(res, cur): Update res if the current sum is higher.
+
+🔄 Example Walkthrough:
+Input: nums = [10, 20, 30, 5, 10, 50]
+
+Step-by-step:
+
+Start: cur = 10, res = 10
+
+i = 1 (20 > 10):
+
+No reset
+
+cur = 10 + 20 = 30
+
+res = max(10, 30) = 30
+
+i = 2 (30 > 20):
+
+No reset
+
+cur = 30 + 30 = 60
+
+res = max(30, 60) = 60
+
+i = 3 (5 < 30):
+
+Reset cur = 0
+
+cur = 0 + 5 = 5
+
+res = max(60, 5) = 60
+
+i = 4 (10 > 5):
+
+No reset
+
+cur = 5 + 10 = 15
+
+res = max(60, 15) = 60
+
+i = 5 (50 > 10):
+
+No reset
+
+cur = 15 + 50 = 65
+
+res = max(60, 65) = 65
+
+Final Output: 65
+
+⚠️ Small Difference from Previous Version:
+In your original version, if the sequence broke, you set cur = nums[i] (new start).
+
+In this version, you set cur = 0 and then cur += nums[i], which has the same effect—just written differently.
+
+🧾 Summary:
+✅ Functionality: Finds max sum of strictly increasing subarray.
+
+🕒 Time Complexity: O(n)
+
+🧠 Logic: Reset cur when the ascending condition breaks.
