@@ -1,0 +1,67 @@
+Code : 
+class Solution:
+    def maxAscendingSum(self, nums: List[int]) -> int:
+        cur = nums[0]
+        res = cur 
+
+        for i in range(1, len(nums)):
+            if nums[i-1] < nums[i]:
+                cur += nums[i]
+            else:
+                cur = nums[i]
+            res = max(res, cur)
+        return res 
+       
+
+Explanation : 
+✅ What it does:
+It tracks ascending subarrays (where each number is greater than the one before).
+
+It calculates the sum of such subarrays.
+
+It returns the maximum sum among all such subarrays.
+
+🧠 Variable Breakdown:
+cur: This stores the sum of the current ascending subarray.
+
+res: This keeps track of the maximum sum found so far.
+
+🔁 Loop Explanation:
+The for loop starts from index 1 and goes through the rest of the array.
+
+At each iteration:
+If nums[i] is greater than nums[i - 1], it means the subarray is still ascending, so:
+
+Add nums[i] to the current sum (cur += nums[i]).
+
+Else, the ascending subarray has ended, so:
+
+Start a new subarray from this number (cur = nums[i]).
+
+Update the result with the maximum of res and cur.
+
+📦 Example:
+Input: nums = [10, 20, 30, 5, 10, 50]
+
+Step-by-step:
+
+Start with cur = 10, res = 10
+
+20 > 10 → cur = 10+20 = 30
+
+30 > 20 → cur = 30+30 = 60 → res = 60
+
+5 < 30 → start new subarray: cur = 5
+
+10 > 5 → cur = 5+10 = 15
+
+50 > 10 → cur = 15+50 = 65 → res = 65
+
+Output: 65
+
+🧾 Summary:
+The code finds the maximum sum of any strictly increasing subarray.
+
+Time complexity: O(n), where n is the length of the array.
+
+Space complexity: O(1) – uses constant space. 
