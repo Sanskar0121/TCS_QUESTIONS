@@ -1,0 +1,59 @@
+CODE : 
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        k = k % len(nums)
+        l, r = 0, len(nums) - 1
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l, r = l + 1, r - 1
+        
+        l, r = 0, k - 1
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l, r = l + 1, r - 1
+        
+        l, r = k, len(nums) - 1
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l, r = l + 1, r - 1 
+EXPLANATION : 
+🧠 Explanation:
+This is known as the three-reversal technique.
+
+🪄 Why k = k % len(nums)?
+This handles cases where k is greater than the length of the array.
+
+For example, rotating an array of length 5 by 7 steps is the same as rotating it by 7 % 5 = 2 steps.
+
+🔄 Steps with Example:
+Let’s take:
+
+python
+Copy
+Edit
+nums = [1, 2, 3, 4, 5, 6, 7], k = 3
+👉 Step 1: Reverse the entire array
+Before: [1, 2, 3, 4, 5, 6, 7]
+After reversing: [7, 6, 5, 4, 3, 2, 1]
+
+👉 Step 2: Reverse the first k elements (k = 3)
+Before: [7, 6, 5]
+After reversing: [5, 6, 7]
+Full array: [5, 6, 7, 4, 3, 2, 1]
+
+👉 Step 3: Reverse the remaining n-k elements (4 to end)
+Before: [4, 3, 2, 1]
+After reversing: [1, 2, 3, 4]
+Final array: [5, 6, 7, 1, 2, 3, 4]
+
+✅ Correctly rotated to the right by 3 steps.
+
+🕒 Time and Space Complexity:
+Time: O(n) — Each reversal is O(n)
+
+Space: O(1) — Done in-place
+
+📌 Summary:
+This approach avoids using extra space.
+
+The trick is to reverse the entire array, then reverse parts to fix their order.
